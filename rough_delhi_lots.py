@@ -23,7 +23,7 @@ for chunk in pd.read_csv('391_buildings_part2.csv', chunksize=chunksize):
 for i in range(1, 75, 1):
     file_name = 'lots/lots_' + str(i) + '.csv'
     df = pd.read_csv(file_name)
-    df.drop(['Unnamed: 0.1'], axis=1)
+    df = df.drop(df.columns[0], axis=1)
 
 # extract lots falling roughly in Delhi based on manually selected coordinates
 
