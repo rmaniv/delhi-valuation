@@ -2,7 +2,7 @@ import pandas as pd
 lots = pd.DataFrame()
 
 # - divide 391_buildings.csv (look up README.md) into 2 files
-# - split 391_buildings.csv into 2 files to be able to work on them with a computer with 16gb of RAM.
+# - split 391_buildings.csv into 2 files to be able to work on them with a computer with 16GB of RAM.
 # - split them into files with ~100,000 buildings each for faster processing
 
 chunksize = 10 ** 6
