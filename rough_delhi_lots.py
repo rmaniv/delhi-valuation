@@ -18,11 +18,12 @@ for chunk in pd.read_csv('391_buildings_part2.csv', chunksize=chunksize):
     print('File ', file, ' done.')
     file += 1
 
-# remove the column 'Unnamed: 0.1'
+# remove the first 2 useless columns
 
 for i in range(1, 75, 1):
     file_name = 'lots/lots_' + str(i) + '.csv'
     df = pd.read_csv(file_name)
+    df = df.drop(df.columns[0], axis=1)
     df = df.drop(df.columns[0], axis=1)
 
 # extract lots falling roughly in Delhi based on manually selected coordinates
