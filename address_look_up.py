@@ -33,7 +33,7 @@ user_agent_counter = 1
 count = 0
 # Reverse geocode each row in the DataFrame
 for index, row in df.iterrows():
-    if index % 100 == 0:
+    if index % 100 == 0:  # Change user agent every 100 requests
         user_agent = user_agent_base + str(user_agent_counter)
         user_agent_counter += 1
 
@@ -43,8 +43,13 @@ for index, row in df.iterrows():
     count += 1
     if address:
         addresses.append(address)
-    time.sleep(0.001)
+    time.sleep(0.001)  # Respect Nominatim's rate limit
 
-# Convert list of addresses to a DataFrame and save to CSV
+# Convert list of addresses to a DataFrame
 df_addresses = pd.DataFrame(addresses, columns=["Address"])
+
+# Drop rows that don't contain the word "Delhi"
+df_addresses = df_addresses[df_addresses['Address'].str.contains('Delhi', case=False, na=False)]
+
+# Save the filtered DataFrame to CSV
 df_addresses.to_csv('all_addresses.csv', index=False)
