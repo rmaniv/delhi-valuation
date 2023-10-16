@@ -31,5 +31,9 @@ for index, row in df.iterrows():
         df.at[index, 'circle_rate_land_rate'] = land_rate
         df.at[index, 'land_value'] = land_rate * row['area_in_meters']
 
+# Calculate the total land value of all lots
+total_land_value = df['land_value'].sum()
+print(f"Total land value of all lots: {total_land_value}")
+
 # Save the modified DataFrame
 df.to_csv('more_accurate_delhi_lots_with_land_values.csv', index=False)
