@@ -2,13 +2,11 @@ import pandas as pd
 import requests
 import time
 
-# Load the CSV file
 df = pd.read_csv('more_accurate_delhi_lots.csv')
 
-# Add an empty 'Address' column to the DataFrame
 df['Address'] = ''
 
-# Define a function to reverse geocode using Nominatim API and append all addresses
+# reverse geocode using Nominatim API and append all addresses
 def reverse_geocode_nominatim(lat, lng, user_agent):
     base_url = "https://nominatim.openstreetmap.org/reverse"
     params = {
@@ -31,7 +29,6 @@ def reverse_geocode_nominatim(lat, lng, user_agent):
 user_agent_base = "DelhiLots"
 user_agent_counter = 1
 
-# Reverse geocode each row in the DataFrame
 for index, row in df.iterrows():
 
     if index % 100 == 0:  # Change user agent every 100 requests
@@ -46,8 +43,7 @@ for index, row in df.iterrows():
     
     time.sleep(1)
 
-# Filter out rows without "Delhi" in the address
+# filter out rows without "Delhi" in the address
 df = df[df['Address'].str.contains('Delhi', case=False, na=False)]
 
-# Save the updated DataFrame to CSV
 df.to_csv('more_accurate_delhi_lots_with_addresses.csv', index=False)
