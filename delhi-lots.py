@@ -23,7 +23,7 @@ def is_point_inside_polygon(point, polygon):
 
     return odd_nodes
 
-df = pd.read_csv('rough_delhi_lots.csv')
+df = pd.read_csv('rough_delhi_buildings.csv')
 
 # check if each point is inside Delhi and store the results in a new column
 df['inside_delhi'] = df.apply(lambda row: is_point_inside_polygon((row['longitude'], row['latitude']), lat_lon_pairs), axis=1)
@@ -31,4 +31,4 @@ df['inside_delhi'] = df.apply(lambda row: is_point_inside_polygon((row['longitud
 # filter the points that are inside Delhi
 delhi_points = df[df['inside_delhi']]
 
-delhi_points.to_csv('more_accurate_delhi_lots.csv', index=False)
+delhi_points.to_csv('more_accurate_delhi_buildings.csv', index=False)
