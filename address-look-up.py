@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 import time
 
-df = pd.read_csv('more_accurate_delhi_lots.csv')
+df = pd.read_csv('more_accurate_delhi_buildings.csv')
 
 df['Address'] = ''
 
@@ -26,7 +26,7 @@ def reverse_geocode_nominatim(lat, lng, user_agent):
         print(f"Error processing response: {e}")
         return None
 
-user_agent_base = "DelhiLots"
+user_agent_base = "Delhibuildings"
 user_agent_counter = 1
 
 for index, row in df.iterrows():
@@ -46,4 +46,4 @@ for index, row in df.iterrows():
 # filter out rows without "Delhi" in the address
 df = df[df['Address'].str.contains('Delhi', case=False, na=False)]
 
-df.to_csv('more_accurate_delhi_lots_with_addresses.csv', index=False)
+df.to_csv('more_accurate_delhi_buildings_with_addresses.csv', index=False)
