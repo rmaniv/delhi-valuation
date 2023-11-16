@@ -2,7 +2,7 @@ import pandas as pd
 
 circle_rate_df = pd.read_csv('circle-rate.csv')
 
-df = pd.read_csv('more_accurate_delhi_lots_with_addresses.csv')
+df = pd.read_csv('more_accurate_delhi_buildings_with_addresses.csv')
 
 df['land_value'] = 0
 df['circle_rate_area'] = ''
@@ -24,11 +24,11 @@ for index, row in df.iterrows():
         
         df.at[index, 'circle_rate_area'] = matching_area
         df.at[index, 'circle_rate_land_rate'] = land_rate
-        # calculate lot land value
+        # calculate land value
         df.at[index, 'land_value'] = land_rate * row['area_in_meters']
 
-# total land value of all lots
+# total land value of all buildings
 total_land_value = df['land_value'].sum()
-print(f"Total land value of all lots: {total_land_value}")
+print(f"Total land value under all buildings: {total_land_value}")
 
-df.to_csv('more_accurate_delhi_lots_with_land_values.csv', index=False)
+df.to_csv('more_accurate_delhi_buildings_with_land_values.csv', index=False)
